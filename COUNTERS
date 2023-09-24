@@ -1,0 +1,63 @@
+function CountMoneybag()
+    local moneyCount = 0
+    
+    
+    local player = game.Players.LocalPlayer
+    local backpack = player.Backpack
+    
+    for _, tool in pairs(backpack:GetChildren()) do
+        if tool.Name == "Moneybag" then
+            moneyCount = moneyCount + 1
+        end
+    end
+    
+    return moneyCount
+end
+
+function CountFuseBomb()
+    local fuseBombCount = 0
+    
+    
+    local player = game.Players.LocalPlayer
+    local backpack = player.Backpack
+    
+    for _, tool in pairs(backpack:GetChildren()) do
+        if tool.Name == "FuseBomb" then
+            fuseBombCount = fuseBombCount + 1
+        end
+    end
+    
+    return fuseBombCount
+end
+
+function EnlightenBomb()
+    local enlightenCount = 0
+    
+    
+    local player = game.Players.LocalPlayer
+    local backpack = player.Backpack
+    
+    for _, tool in pairs(backpack:GetChildren()) do
+        if tool.Name == "The Arkenstone" then
+            enlightenCount = enlightenCount + 1
+        end
+    end
+    
+    return enlightenCount
+end
+
+function CountRemoteMine()
+    local minesCount = 0
+    
+    
+    local player = game.Players.LocalPlayer
+    local backpack = player.Backpack
+    
+    for _, tool in pairs(backpack:GetChildren()) do
+        if tool.Name == "RemoteMine" then
+            minesCount = minesCount + 1
+        end
+    end
+    
+    return minesCount
+end
