@@ -1,5 +1,5 @@
 -- some uh inv script?
 -- bet
 
-local copy = "https://discord.gg/7Bpd2gm8"
+local copy = "https://discord.gg/PfjD8uUf"
 setclipboard(tostring(copy))
