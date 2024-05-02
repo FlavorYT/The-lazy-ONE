@@ -1,110 +1,28 @@
-game.StarterGui:SetCore( "ChatMakeSystemMessage",  { Text = "! Made by leakz | EvilAlienWare, V3.", Color = Color3.fromRGB( 0,0,255 ), Font = Enum.Font.Arial, FontSize = Enum.FontSize.Size24 } )
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/FlavorYT/The-lazy-ONE/main/COUNTERS"))()
-
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/FlavorYT/Lazy-Orion-Hub-Main-Source/main/Aku%20sayang')))()
-local gameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
-local Window = OrionLib:MakeWindow({Name = "Laziest V3 | Comeback.", HidePremium = false, SaveConfig = false, ConfigFolder = "Lazy Hub", IntroEnabled = True, IntroText = "Laziest V3"})
-
-OrionLib:MakeNotification({
-	Name = "Loaded!",
-	Content = "Lazy Hub | " ..gameName,
-	Image = "rbxassetid://7733920644",
-	Time = 5
-})
-
-local Tab = Window:MakeTab({
-	Name = "Main",
-	Icon = "rbxassetid://7733960981",
-	PremiumOnly = false
-})
-
-local Section = Tab:AddSection({
-	Name = "Main Scripts"
-})
-
-Tab:AddLabel("Main Scripts / Section")
-
-Tab:AddButton({
-	Name = "Reset",
-	Callback = function()
-local player = game.Players.LocalPlayer
-
-local function dieMyCharacter()
-    local character = player.Character
-    if character then
-        local humanoid = character:FindFirstChild("Humanoid")
-        if humanoid then
-            humanoid.Health = 0
-        end
-    end
-end
-
-local triggerCondition = true
-
-if triggerCondition then
-    dieMyCharacter()
-     end    
-end
-})
-
-Tab:AddButton({
-	Name = "Refresh",
-	Callback = function()
-      		local player = game:GetService("Players").LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local savedPosition = character:WaitForChild("HumanoidRootPart").Position
-character:WaitForChild("Humanoid").Health = 0
-player.CharacterAdded:Wait()
-wait(0.5)
-player.Character:WaitForChild("HumanoidRootPart").CFrame = CFrame.new(savedPosition)
-  	end    
-})
-
-local isRunningg = false
-
-local function RemoveInventory()
-    local player = game.Players.LocalPlayer
-    while isRunningg do
-        for _, tool in ipairs(player.Backpack:GetChildren()) do
-            tool:Destroy()
-        end
-        wait(1)
-    end
-end
-
-Tab:AddButton({
-    Name = "See if others use same script",
-    Callback = function()
-        local Players = game:GetService("Players")
-        local LocalPlayer = Players.LocalPlayer
-        local OrionLib = require(game:GetService("ReplicatedStorage"):WaitForChild("OrionLib"))
-
-        game.ReplicatedStorage.ScriptEvent:FireServer()
-
-        game.ReplicatedStorage.ScriptEvent.OnClientEvent:Connect(function(scriptUsers)
-            if next(scriptUsers) == nil then
-                OrionLib:MakeNotification({
-                    Name = "No one used the same script",
-                    Content = "",
-                    Image = "rbxassetid://7733920644",
-                    Time = 5
-                })
-            else
-                local notificationText = ""
-                for userId, _ in pairs(scriptUsers) do
-                    local player = Players:GetPlayerByUserId(userId)
-                    if player then
-                        notificationText = notificationText .. player.Name .. " is using the same script.\n"
-                    end
-                end
-                OrionLib:MakeNotification({
-                    Name = "Detected",
-                    Content = notificationText,
-                    Image = "rbxassetid://7733920644",
-                    Time = 5
-                })
+while true do
+    -- Highlight the LocalPlayer's character
+    if LocalPlayer.Character then
+        for _, part in ipairs(LocalPlayer.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.BrickColor = BrickColor.new("Bright red")
             end
-        end)
+        end
     end
-})
+    
+    -- Wait for a short period before highlighting again
+    wait(0.5)
+    
+    -- Restore the original color after highlighting
+    if LocalPlayer.Character then
+        for _, part in ipairs(LocalPlayer.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.BrickColor = part.OriginalColor or part.BrickColor
+            end
+        end
+    end
+    
+    -- Wait for a short period before the next loop iteration
+    wait(0.5)
+end
